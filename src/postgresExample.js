@@ -36,6 +36,11 @@ async function main() {
     })
 
     await Herois.sync()
+    
+    await Herois.create({
+        nome:"Chapolim",
+        poder: "Marreta"
+    })
 
     const result = await Herois.findAll({
         raw:true
