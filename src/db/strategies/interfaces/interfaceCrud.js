@@ -27,6 +27,11 @@ class ICrud {
     }
 
 
+    connect(){
+        throw new NotImplementendException()
+    }
+
+
 }
 
 module.exports = ICrud

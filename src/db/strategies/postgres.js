@@ -78,6 +78,12 @@ class PostgresDB extends ICrud{
     async read(item = {}){
         return this._herois.findAll({where: item, raw: true})
     }
+
+    async delete(id){
+        const query = id ? {id} : {}
+
+        return this._herois.destroy({where: query})
+    }
 }
 
 module.exports = PostgresDB
