@@ -42,7 +42,7 @@ class MongoDB extends ICrud {
             }
         })
         
-        this._herois = Mongoose.model('herois', heroiSchema)
+        this._herois = Mongoose.models.Herois  || Mongoose.model('Herois', heroiSchema)
 
     }
 
@@ -55,13 +55,15 @@ class MongoDB extends ICrud {
         })
 
         const connnection = Mongoose.connection
-        connnection.once('open', () => console.log('database rodando'))
-
         this._driver = connnection
+        connnection.once('open', () => console.log('database rodando'))
+        this.defineModel()
+
+       
     }
 
-    create(item) {
-        console.log('O item foi salvo com sucesso')
+     create(item) {
+        return this._herois.create(item)
     }
 }
 

@@ -3,6 +3,11 @@ const MongoDB = require('../db/strategies/mongodb')
 const Context = require('../db/strategies/base/contextStrategy')
 const context = new Context(new MongoDB())
 
+const MOCK_DEFAULT_CADASTRAR = {
+    nome: 'Batman',
+    poder: 'Grana'
+}
+
 describe('Mongo Strategy', function () {
 
     this.beforeAll( async () =>{
@@ -10,9 +15,14 @@ describe('Mongo Strategy', function () {
     })
 
 
-    it('verificar conexao', async function() {
+    it('verificar conexao', async () => {
         const result = await context.isConnected()
         const expected = 'Conectado'
         assert.deepEqual(result, expected)
+    })
+
+    it('cadastrar', async () => {
+        const {nome, poder} = await context.create(MOCK_DEFAULT_CADASTRAR)
+        assert.deepEqual({nome, poder}, MOCK_DEFAULT_CADASTRAR)
     })
 })
